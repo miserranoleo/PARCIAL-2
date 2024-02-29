@@ -64,7 +64,9 @@ print(f"Galaxia de C: {estrella_C.galaxia()}")
 # Calcular distancias entre estrellas
 dist_AB = estrella_A.distancia(estrella_B)
 dist_BC = estrella_B.distancia(estrella_C)
-dist_AC = estrella_A.distancia(estrella_C)  # Nueva línea para calcular la distancia entre A y C
+dist_AC = estrella_A.distancia(estrella_C) 
+
+# Nueva línea para calcular la distancia entre A y C
 print(f"Distancia entre A y B: {dist_AB:.2f}")
 print(f"Distancia entre B y C: {dist_BC:.2f}")
 print(f"Distancia entre A y C: {dist_AC:.2f}")
