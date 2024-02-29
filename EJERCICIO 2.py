@@ -1,21 +1,39 @@
-#Texto original
-#un día que el viento soplaba con fuerza#mira como se mueve aquella banderola -dijo un monje#lo que se mueve es el viento -respondió otro monje#ni las banderolas ni el viento, lo que se mueve son vuestras mentes -dijo el maestro
+class TextFormatter:
+    def __init__(self, texto_original):
+        self.texto_original = texto_original
 
-texto_original = "un día que el viento soplaba con fuerza#mira como se mueve aquella banderola -dijo un monje#lo que se mueve es el viento -respondió otro monje#ni las banderolas ni el viento, lo que se mueve son vuestras mentes -dijo el maestro"
+    def separar_oraciones(self):
+        oraciones = self.texto_original.split("#")
+        return oraciones
 
-# Separar las oraciones utilizando el símbolo '#' como delimitador
-oraciones = texto_original.split("#")
+    def capitalizar_oraciones(self, oraciones):
+        oraciones_capitalizadas = [oracion.capitalize() for oracion in oraciones]
+        return oraciones_capitalizadas
 
-# Capitalizar la primera letra de cada oración
-oraciones_capitalizadas = [oracion.capitalize() for oracion in oraciones]
+    def agregar_puntos(self, oraciones_capitalizadas):
+        oraciones_capitalizadas[0] += "..."
+        return oraciones_capitalizadas
 
-# Agregar "..." al final de la primera oración
-oraciones_capitalizadas[0] += "..."
+    def agregar_bullets(self, oraciones_capitalizadas):
+        oraciones_formateadas = [oraciones_capitalizadas[0]] + [f"• {oracion}." for oracion in oraciones_capitalizadas[1:-2]] + [f"• {oracion}." for oracion in oraciones_capitalizadas[-2:]]
+        return oraciones_formateadas
 
-# Agregar bullets (viñetas) y punto al final solo a las últimas tres frases
-oraciones_formateadas = [oraciones_capitalizadas[0]] + [f"• {oracion}." for oracion in oraciones_capitalizadas[1:-2]] + [f"• {oracion}." for oracion in oraciones_capitalizadas[-2:]]
+    def formatear_texto(self, oraciones_formateadas):
+        texto_formateado = "\n".join(oraciones_formateadas)
+        return texto_formateado
 
-# Unir las oraciones con un salto de línea
-texto_formateado = "\n".join(oraciones_formateadas)
+def main():
+    texto_original = "un día que el viento soplaba con fuerza#mira como se mueve aquella banderola -dijo un monje#lo que se mueve es el viento -respondió otro monje#ni las banderolas ni el viento, lo que se mueve son vuestras mentes -dijo el maestro"
 
-print(texto_formateado)
+    formatter = TextFormatter(texto_original)
+
+    oraciones = formatter.separar_oraciones()
+    oraciones_capitalizadas = formatter.capitalizar_oraciones(oraciones)
+    oraciones_capitalizadas = formatter.agregar_puntos(oraciones_capitalizadas)
+    oraciones_formateadas = formatter.agregar_bullets(oraciones_capitalizadas)
+    texto_formateado = formatter.formatear_texto(oraciones_formateadas)
+
+    print(texto_formateado)
+
+if __name__ == "__main__":
+    main()
